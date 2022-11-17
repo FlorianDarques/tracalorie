@@ -1,4 +1,6 @@
 <?php
+session_start();
+// include('function/function.php');
 if (isset($_POST['submit'])) {
     define("DBHOST", "localhost");
     define("DBUSER", "root");
@@ -28,16 +30,20 @@ if (isset($_POST['submit'])) {
                 $query = $db->prepare($sql);
                 $query->execute(array($email));
                 $userinfo = $query->rowCount();
+                $user = $query->fetchAll();
+                // echo "<pre>";
+                // var_dump($_SESSION);
+                // echo "</pre>";
+                $_SESSION['user'] = [
+                    'username' => $user[0]["username"],
+                    'email' => $user[0]["email"],
+                    'height' => $user[0]["height"],
+                    'weight' => $user[0]["weight"],
+                    'gender' => $user[0]["gender"]
+                ];
+                echo $_SESSION['user']['gender'];
+                header ('location: ../user.php');
             }
-            session_start();
-            $_SESSION['connect'] = 1;
-            header ('location: ../user.php');
-            exit();
-            // $userdata = $query->fetchAll();
-            // if (!empty($userdata)) {
-            //     $username = $userdata[0]["username"];
-            //     echo $username;
-            // }
         }
     } catch (PDOException $e) {
         die($e->getMessage());

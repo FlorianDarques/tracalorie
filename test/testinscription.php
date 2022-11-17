@@ -16,21 +16,21 @@ if (isset($_POST['submit'])) {
         $height = htmlentities($_POST['height']);
         $weight = htmlentities($_POST['weight']);
         $gender = $_POST['gender'];
-        if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['pswd']) && !empty($_POST['pswd_cfrm']) && !empty($_POST['weight']) && !empty($_POST['height'])) {
-            if (!filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL)) {
+        if (!empty($_POST['email']) && !empty($_POST['username']) && !empty($_POST['pswd']) && !empty($_POST['pswd_cfrm']) && !empty($_POST['weight']) && !empty($_POST['height']) && $gender === "1" || "2") {
+            if (filter_input(INPUT_POST, "email", FILTER_VALIDATE_EMAIL)) {
                 $check = $db->prepare('SELECT * FROM membre WHERE email = ?');
                 $check->execute(array($email));
                 $data = $check->fetch();
                 $row = $check->rowCount();
+                $email = strtolower($email);
                 if ($row === 0 && $pswd === $pswd_cfrm) {
-                    if (is_numeric($height) && is_numeric($weight) && is_bool($gender)) {
-                        $email = strtolower($email);
-                        $pswd = htmlentities(password_hash($_POST['pswd'], PASSWORD_DEFAULT, ['cost' => 12]));
-                        $sql = "INSERT INTO `membre`(email, username, pswd) VALUES ('$email', '$username', '$pswd')";
+                    $pswd = htmlentities(password_hash($_POST['pswd'], PASSWORD_DEFAULT, ['cost' => 12]));
+                    if (is_numeric($height) && is_numeric($weight)) {
+                        $sql = "INSERT INTO `membre`(email, username, pswd, height, weight, gender) VALUES ('$email', '$username', '$pswd', '$height', '$weight', '$gender')";
                         $query = $db->prepare($sql);
                         $query->execute();
                     } else {
-                        echo "valeur non numérique";
+                        echo "le poids , la taille ou le sexe n'est pas valide";
                     }
                 } else {
                     echo "compte existant ou mot de passe pas identique";
@@ -39,13 +39,10 @@ if (isset($_POST['submit'])) {
                 echo "adresse mail non valide";
             }
         } else {
+            header('location: ../inscription/inscriptionform.php');
             echo "il y a des champs vide";
         };
     } catch (PDOException $e) {
         die($e->getMessage());
     }
 }
-// header('location: inscriptionform.php');
-                    // $sql = "INSERT INTO `membre`(gender, height, weight) VALUES ('$gender','$height','$weight')";
-                    // $query = $db->prepare($sql);
-                    // $query->execute();

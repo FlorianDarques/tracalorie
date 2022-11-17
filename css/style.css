@@ -2,10 +2,3 @@
     margin: 0;
     padding: 0;
 }
-.flex {
-    display: flex;
-}
-.content {
-    justify-content: center;
-    flex-direction: column;
-}
