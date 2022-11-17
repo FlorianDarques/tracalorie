@@ -1,5 +1,6 @@
 <?php
-include('function/function.php');
+session_start();
+// include('function/function.php');
 if (isset($_POST['submit'])) {
     define("DBHOST", "localhost");
     define("DBUSER", "root");
@@ -29,7 +30,16 @@ if (isset($_POST['submit'])) {
                     $sql = "INSERT INTO `membre`(email, username, pswd, height, weight, gender) VALUES ('$email', '$username', '$pswd', '$height', '$weight', '$gender')";
                     $query = $db->prepare($sql);
                     $query->execute();
-                    header('location: ../connexion/connexion.php');
+                    // $id = $db->lastInsertId();
+                    $_SESSION['user'] = [
+                        'username' => $username,
+                        'email' => $email,
+                        'height' => $height,
+                        'weight' => $weight,
+                        'gender' => $gender
+                    ];
+                    // var_dump($_SESSION);
+                    header('location: ../user/user.php');
                 } else {
                     echo "le poids , la taille ou le sexe n'est pas valide";
                 }
