@@ -24,7 +24,7 @@
                 <input type="password" placeholder="Mot de passe" name="pswd" required pattern="{8,255}" autocomplete="off">
             </div>
             <div>
-                <input type="password" placeholder="Confirmation Mot de passe" name="pswd_cfrm" required autocomplete="off">
+                <input type="password" placeholder="Confirmation Mot de passe" name="pswd_cfrm" required pattern="{8,255}" autocomplete="off">
             </div>
             <div>
                 <input type="radio" value="1" name="gender" checked >Homme</input>

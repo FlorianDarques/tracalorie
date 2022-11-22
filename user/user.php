@@ -1,6 +1,5 @@
 <?php
 session_start();
-
 if (empty($_SESSION["user"]) || !isset($_SESSION["user"])) {
     header('Location: ../connexion/connexion.php');
 }
@@ -17,6 +16,8 @@ $imc = number_format($weight / ($height * $height), 1, ',');
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/charts.min.css">
     <title>Mon compte</title>
 </head>
 
@@ -38,7 +39,33 @@ $imc = number_format($weight / ($height * $height), 1, ',');
         </div>
         <button type="submit" name="submit">Valider</button>
     </form>
-
+    <div>
+        <?php
+        $currentdate = date('Y-m-d');
+        $dateminus7 = date('Y-m-d', strtotime($currentdate . ' - 7 days'));
+        $dateminus6 = date('Y-m-d', strtotime($currentdate . ' - 6 days'));
+        $dateminus5 = date('Y-m-d', strtotime($currentdate . ' - 5 days'));
+        $dateminus4 = date('Y-m-d', strtotime($currentdate . ' - 4 days'));
+        $dateminus3 = date('Y-m-d', strtotime($currentdate . ' - 3 days'));
+        $dateminus2 = date('Y-m-d', strtotime($currentdate . ' - 2 days'));
+        $dateminus1 = date('Y-m-d', strtotime($currentdate . ' - 1 days'));
+        ?>
+        <input type="date" name="date" id="date" min="2022-11-11" max="2022-11-18" <?php echo 'value="' .$currentdate. '"' ?>>
+        
+        <table id="custom-effect" class="charts-css column">
+            <tbody>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>

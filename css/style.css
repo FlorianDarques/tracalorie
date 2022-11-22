@@ -2,3 +2,21 @@
     margin: 0;
     padding: 0;
 }
+
+#custom-effect tbody {
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow:
+        inset -5px -5px 10px rgba(0, 0, 0, 0.5),
+        5px 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+#custom-effect tbody td {
+    margin-inline: 10px;
+    border-radius: 10px;
+    background-color: aquamarine;
+    height: 120px;
+    box-shadow:
+        inset -5px -5px 10px rgba(0, 0, 0, 0.5),
+        5px 5px 5px rgba(0, 0, 0, 0.5);
+}
