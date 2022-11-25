@@ -31,9 +31,6 @@ if (isset($_POST['submit'])) {
                     $query->execute(array($email));
                     $userinfo = $query->rowCount();
                     $user = $query->fetchAll();
-                    // echo "<pre>";
-                    // var_dump($_SESSION);
-                    // echo "</pre>";
                     $_SESSION['user'] = [
                         'username' => $user[0]["username"],
                         'email' => $user[0]["email"],
@@ -41,10 +38,20 @@ if (isset($_POST['submit'])) {
                         'weight' => $user[0]["weight"],
                         'gender' => $user[0]["gender"]
                     ];
-                    // echo $_SESSION['user']['gender'];
+
+
+                    // ========= test récup donnée calorie
+                    $email = $_SESSION['user']['email'];
+                    $sql = "SELECT * FROM `calorie` WHERE `emailuser` = '$email'";
+                    $query = $db->prepare($sql);
+                    $query->execute();
+                    $result = $query->fetchAll();
+                    $_SESSION['calorie'] = [
+                        'calorie' => $result[0]["calorie"],
+                        'date' => $result[0]["date"]
+                    ];
                     header('location: ../user/user.php');
-                }
-                else {
+                } else {
                     header('location: connexion.php');
                 }
             }

@@ -38,6 +38,15 @@ if (isset($_POST['submit'])) {
                         'weight' => $weight,
                         'gender' => $gender
                     ];
+                    $email = $_SESSION['user']['email'];
+                    $sql = "SELECT * FROM `calorie` WHERE `emailuser` = '$email'";
+                    $query = $db->prepare($sql);
+                    $query->execute();
+                    $result = $query->fetchAll();
+                    $_SESSION['calorie'] = [
+                        'calorie' => $result[0]["calorie"],
+                        'date' => $result[0]["date"]
+                    ];
                     // var_dump($_SESSION);
                     header('location: ../user/user.php');
                 } else {

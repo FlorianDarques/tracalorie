@@ -13,7 +13,6 @@ if (isset($_POST['submit'])) {
         $height = htmlentities($_POST['height']);
         $weight = htmlentities($_POST['weight']);
         $email = $_SESSION['user']['email'];
-        // echo $email;
         if (!empty($_POST['height'])) {
             $sql = "UPDATE `membre` SET `height` = '$height' WHERE `email`= '$email' ";
             $query = $db->prepare($sql);

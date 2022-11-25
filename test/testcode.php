@@ -22,19 +22,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $errors['email'] = ERROR_EMAIL;
     }
 }
-?>
 
+// ==========================================================================================
 
-<form action="" method="POST">
-    <div>
-        <label for="prenom">Prénom</label><br>
-        <input type="text" name="prenom" id="prenom" value=<?= $firstname ?? '' ?>>
-        <?= $errors['prenom'] ? '<p style="color:red">' . $errors['prenom'] . '</p>' : "" ?>
-    </div>
-    <div>
-        <label for="email">Email</label><br>
-        <input type="email" name="email" id="email" value=<?= $email ?? '' ?>>
-        <?= $errors['email'] ? '<p style="color:red">' . $errors['email'] . '</p>' : "" ?>
-    </div>
-    <button type="submit">Submit</button>
-</form>
