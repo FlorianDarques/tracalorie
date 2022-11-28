@@ -28,10 +28,10 @@ $query->execute();
 $resultats0 = $query->fetchAll();
 if (empty($resultats0)) {
     $calorie = 0;
-    // echo $calorie;
+    // echo $calorie . " ";
 } else {
     $calorie = $resultats0[0]['calorie'];
-    // echo $calorie;
+    // echo $calorie . " ";
 }
 
 
@@ -44,10 +44,10 @@ $query->execute();
 $resultats1 = $query->fetchAll();
 if (empty($resultats1)) {
     $calorie1 = 0;
-    // echo $calorie1;
+    // echo $calorie1 . " ";
 } else {
     $calorie1 = $resultats1[0]['calorie'];
-    // echo $calorie1;
+    // echo $calorie1 . " ";
 }
 
 
@@ -60,10 +60,10 @@ $query->execute();
 $resultats2 = $query->fetchAll();
 if (empty($resultats2)) {
     $calorie2 = 0;
-    // echo $calorie2;
+    // echo $calorie2 . " ";
 } else {
     $calorie2 = $resultats2[0]['calorie'];
-    // echo $calorie2;
+    // echo $calorie2 . "  ";
 }
 
 
